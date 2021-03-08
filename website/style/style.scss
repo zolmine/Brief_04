@@ -1,0 +1,16 @@
+$readmore : #d41850;
+$nav-fot : #2b3636;
+$font-stack: 'Poppins';
+
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    box-sizing: border-box;
+    font-family: $font-stack;
+}
+@import "./sidebar";
+@import "./header";
+@import"./footer";
+@import"./contactus";
+
