@@ -9,6 +9,7 @@ $font-stack: 'Poppins';
     box-sizing: border-box;
     font-family: $font-stack;
 }
+@import"./our-programs";
 @import "./sidebar";
 @import "./header";
 @import"./footer";
