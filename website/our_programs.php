@@ -12,14 +12,14 @@
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt similique aperiam minima, praesentium pariatur rem asperiores eum eos quidem ea, recusandae saepe voluptatum perferendis ducimus sunt fuga, libero architecto sapiente.</p>
             </div>
             <div>
-            <img src="img/number_1.png" alt="our programs">
+            <img src="./images/1.png" alt="our programs">
             
             </div>
         </div>
         <div class="section">
 
             <div>
-            <img src="img/number_2.png" alt="our programs">
+            <img src="./images/2.png" alt="our programs">
             </div>
             <div>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt similique aperiam minima, praesentium pariatur rem asperiores eum eos quidem ea, recusandae saepe voluptatum perferendis ducimus sunt fuga, libero architecto sapiente.</p>
@@ -30,7 +30,7 @@
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt similique aperiam minima, praesentium pariatur rem asperiores eum eos quidem ea, recusandae saepe voluptatum perferendis ducimus sunt fuga, libero architecto sapiente.</p>
             </div>
             <div>
-            <img src="img/number_3.png" alt="our programs">
+            <img src="./images/3.png" alt="our programs">
             </div>
     </div>
 </div>
