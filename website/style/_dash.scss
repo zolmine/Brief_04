@@ -139,18 +139,24 @@
         }
 
         .filter {
-            display: flex;
             margin-bottom: 1.5rem;
+            text-align: center;
 
 
             .filter-search {
-                position: relative;
-                left: 500px;
+                // position: relative;
+                // left: 500px;
 
                 #search {
                     width: 300px;
                     height: 30px;
                     color: black;
+                    border: 1px solid black;
+                    border-radius: 6px
+                }
+                ::placeholder{
+                    color: grey;
+                    padding-left: 10px;
                 }
             }
         }

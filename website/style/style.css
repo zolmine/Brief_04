@@ -245,19 +245,21 @@
 }
 
 .dash-content .contenuu .filter {
-  display: flex;
   margin-bottom: 1.5rem;
-}
-
-.dash-content .contenuu .filter .filter-search {
-  position: relative;
-  left: 500px;
+  text-align: center;
 }
 
 .dash-content .contenuu .filter .filter-search #search {
   width: 300px;
   height: 30px;
   color: black;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.dash-content .contenuu .filter .filter-search ::placeholder {
+  color: grey;
+  padding-left: 10px;
 }
 
 .dash-content .contenuu .painel {
@@ -561,7 +563,6 @@ nav {
 
 nav .logo {
   width: 15%;
-  src: url("");
   float: left;
   width: 40%;
   display: flex;

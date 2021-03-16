@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include 'include/meta.php'; 
-      require 'connection.php';  
+      require 'actions/connection.php';  
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
@@ -20,7 +20,14 @@
             <div class="grid">
                 <div class="static staf-stat">
                     <div class="l">
-                        <span>10</span>
+                    <?php 
+                        $sqli = "SELECT COUNT(`idstf`) as staff_number FROM staff ";
+                        $fetch  = $connection->query($sqli);
+                        $row    = $fetch->fetch_assoc();
+                        $staff_number = $row['staff_number'];
+                        
+                    ?>
+                        <span><?php echo $staff_number ?></span>
                         <span>Staff</span>
                     </div>
                     <div class="icon">
@@ -29,7 +36,13 @@
                 </div>
                 <div class="static etud-stat">
                     <div class="l">
-                        <span>59</span>
+                    <?php
+                        $sqli = "SELECT COUNT(`idstd`) as students_number FROM students";
+                        $fetch = $connection->query($sqli);
+                        $row    = $fetch->fetch_assoc();
+                        $students_number = $row['students_number'];
+                    ?>
+                        <span><?php echo $students_number ?></span>
                         <span>etudiant</span>
                     </div>
                     <div class="icon">
@@ -38,7 +51,7 @@
                 </div>
                 <div class="static class-stat">
                     <div class="l">
-                        <span>10</span>
+                        <span>4</span>
                         <span>Class</span>
                     </div>
                     <div class="icon">
@@ -47,7 +60,7 @@
                 </div>
                 <div class="static campus-stat">
                     <div class="l">
-                        <span>3</span>
+                        <span>1</span>
                         <span>Campus</span>
                     </div>
                     <div class="icon">
@@ -56,8 +69,6 @@
                 </div>
             </div>
             <div class="filter">
-                <button class="open-modal" id="adduser2" onclick="document.getElementById('modal1').style.visibility='visible'" >Add User</button>
-                <button class="open-modal" id="deluser"  >Delete</button>
 
                 <div class="filter-search">
                     <input type="text" width="300px" name="search" id="search" placeholder="Search" autocomplete="off"
@@ -74,24 +85,42 @@
                                 <th>Id</th>
                                 <th>Nom</th>
                                 <th class="hidden">Email</th>
-                                <th>Type</th>
+                                <th>Password</th>
+                                <th>Class</th>
                                 <th>Actions</th>
                             </tr>
                             <?php
-                                    
+                                 $stm = "select * from staff ";
+                                 $fetch = $connection->query($stm);
+                                while($row = $fetch->fetch_assoc()){
+
+                                 
                             ?>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td class="hidden"></td>
-                                <td></td>
+                                <td><?php  $idstf = $row['idstf'];
+                                echo $idstf;
+                                 ?></td>
+                                <td><?php $full_name = $row['full_name'];
+                                echo $full_name; 
+                                ?></td>
+                                <td class="hidden"> <?php $email = $row['email'];
+                                echo $email; 
+                                ?> </td>
+                                <td><?php $pass = $row['password'];
+                                echo $pass; 
+                                ?></td>
+                                <td><?php $class = $row['class'];
+                                echo $class; 
+                                ?></td>
                                 <td>
-                                    <a href="#" class="btn btn-red"><i class="fa fa-trash" style="color: red;"></i></a>
-                                    <a href="#" class="btn btn-orange"><i class="fa fa-edit"
+                                    <a href="#"  class="btn btn-red"><i class="fa fa-trash" style="color: red;"></i></a>
+                                    <a href="#" onclick="edit('<?php echo $idstf ?>','<?php echo $full_name ?>','<?php echo $email ?>','<?php echo $pass ?>','<?php echo $class ?>')" class="btn btn-orange"><i class="fa fa-edit"
                                             style="color: lightblue;"></i></a>
                                 </td>
                             </tr>
-                            
+                            <?php
+                                }
+                            ?>
                            
                             
                         </tbody>
@@ -100,7 +129,7 @@
             </div>
             <div class="modal is-visible" id="modal1">
                 <div class="modal-dialog">
-                    <form action="" class="form">
+                    <form action="actions/crud.php" method="post" class="form">
                         <div class="modal-header">
                             <div class="modal-title">Create New User</div>
                             <button class="close-modal" aria-label="close modal" data-close="" type="button">x</button>
@@ -115,16 +144,65 @@
                                 <input type="email" name="email" id="" placeholder="Email">
                             </div>
                             <div class="group">
-                                <label for="select">Select</label>
-                                <select name="select" id="select">
-                                    <option value="">Staff</option>
-                                    <option value="">Etudiant</option>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="" placeholder="password">
+                            </div>
+                            <div class="group">
+                                <label for="email">Class</label>
+                                <select name="class" id="">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                                 </select>
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <center><button type="submit" id="adduser2">Add</button></center>
+                            <center><button type="submit" name="add" id="adduser2">Add</button></center>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="modal is-visible" id="modal2">
+                <div class="modal-dialog">
+                    <form action="actions/crud.php" class="form" method="post">
+                        <div class="modal-header">
+                            <div class="modal-title">Edite User</div>
+                            <button class="close-modal" aria-label="close modal" data-close="" type="button">x</button>
+                        </div>
+                        <div class="modal-content">
+                            <div class="group">
+                                <label >Id</label>
+                                <input type="text" name="id_edited" id="id_edited" readonly value="" >
+                            </div>
+                            <div class="group">
+                                <label >Name</label>
+                                <input type="text" name="name_edited" id="name_edited" value="" >
+                            </div>
+                            <div class="group">
+                                <label >E-mail</label>
+                                <input type="email" name="email_edited" value="" id="email_edited" >
+                            </div>
+                            <div class="group">
+                                <label for="pass_edited">Password</label>
+                                <input type="password" name="pass_edited" value="" id="pass_edited" placeholder="password">
+                            </div>
+                            <div class="group">
+                                <label for="class_edited">Class</label>
+                                <select name="class_edited" id="class_edited">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                </select>
+                            </div>
+                            
+
+                        </div>
+                        <div class="modal-footer">
+                            <center><button type="submit" name="edit" id="adduser2">Add</button></center>
                         </div>
                     </form>
                 </div>
@@ -134,13 +212,10 @@
     <script>
 // If user clicks anywhere outside of the modal, Modal will close
 
-var modal = document.getElementById('modal1');
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.visibility = "hidden";
-    }
-}
+
+
 </script>
+<script src="js/action.js"></script>
 
 </body>
 
