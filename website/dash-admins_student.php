@@ -12,7 +12,7 @@
         <div class="contenuu">
             <div class="contenuu-nav">
                 <h2 class="title_list">Dash Board</h2>
-                <button type="hidden" class="open-modal" id="adduser2"
+                <button class="open-modal" id="adduser1"
                     onclick="document.getElementById('modal1').style.visibility='visible'">Add User</button>
             </div>
 
@@ -67,7 +67,16 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="filter">
+                <button type="hidden" class="open-modal" id="adduser2"
+                    onclick="document.getElementById('modal1').style.visibility='visible'">Add User</button>
+                <div class="filter-search">
+                    <input type="text" width="300px" name="search" id="search" placeholder="Search" autocomplete="off"
+                        class="">
+                    <i class="fa fa-search" id="icon-search"></i>
+                </div>
+
+            </div>
             <div class="painel" style="font-weight: 75%;">
                 <div class="painel-body">
                     <table class="decoration">
@@ -81,13 +90,13 @@
                                 <th>Actions</th>
                             </tr>
                             <?php
-                                 $stm = 'select * from staff ';
+                                 $stm = 'select * from students ';
                                  $fetch = $connection->query($stm);
                                 while ($row = $fetch->fetch_assoc()) {
                                     ?>
                             <tr>
-                                <td><?php  $idstf = $row['idstf'];
-                                    echo $idstf; ?></td>
+                                <td><?php  $idstd = $row['idstd'];
+                                    echo $idstd; ?></td>
                                 <td><?php $full_name = $row['full_name'];
                                     echo $full_name; ?></td>
                                 <td class="hidden"> <?php $email = $row['email'];
@@ -97,11 +106,11 @@
                                 <td><?php $class = $row['class'];
                                     echo $class; ?></td>
                                 <td>
-                                    <a href="actions/crud.php?del_stf=<?php echo $row['idstf']; ?>" onclick="succes()"
-                                        name="del_stf" class="btn btn-red"><i class="fa fa-trash"
+                                    <a href="actions/crud.php?del_std=<?php echo $row['idstd']; ?>" onclick="succes()"
+                                        name="del_std" class="btn btn-red"><i class="fa fa-trash"
                                             style="color: red;"></i></a>
                                     <a href="#"
-                                        onclick="edit_stf('<?php echo $idstf; ?>','<?php echo $full_name; ?>','<?php echo $email; ?>','<?php echo $pass; ?>','<?php echo $class; ?>')"
+                                        onclick="edit_std('<?php echo $idstd; ?>','<?php echo $full_name; ?>','<?php echo $email; ?>','<?php echo $pass; ?>','<?php echo $class; ?>')"
                                         class="btn btn-orange"><i class="fa fa-edit" style="color: lightblue;"></i></a>
                                 </td>
                             </tr>
@@ -196,8 +205,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <center><button onclick="succes()" type="submit" name="edit" id="adduser2">Update</button>
-                            </center>
+                            <center><button onclick="succes()" type="submit" name="edit_std"
+                                    id="adduser2">Update</button></center>
                         </div>
                     </form>
                 </div>
@@ -234,6 +243,12 @@
                         swal("Your imaginary file is safe!");
                     }
                 });
+        }
+        var modal = document.getElementById('modal1');
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.visibility = "hidden";
+            }
         }
     </script>
     <script src="js/action.js"></script>

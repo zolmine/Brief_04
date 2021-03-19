@@ -6,17 +6,26 @@
 
 <body>
     <div class="dash-content">
-        <?php include 'include/sidebar.php'; ?>
+        <?php
+                include 'include/sidebar.php';
+                include 'actions/connexion.php';
+        ?>
 
         <div class="contenuu">
             <div class="contenuu-nav">
                 <h2 class="title_list">Dash Board</h2>
             </div>
 
+            <?php
+                                 $stm = 'select * from students ';
+                                 $fetch = $connection->query($stm);
+                                $row = $fetch->fetch_assoc();
+                                $class_num = $row['class'];
+            ?>
             <div class="grid">
                 <div class="static staf-stat">
                     <div class="l">
-                        <span>10</span>
+                        <span><?php  echo $class_num; ?></span>
                         <span>Staff</span>
                     </div>
                     <div class="icon">
@@ -25,7 +34,16 @@
                 </div>
                 <div class="static etud-stat">
                     <div class="l">
-                        <span>59</span>
+
+                    <?php
+                                 $stm = 'SELECT COUNT(`idstd`) as students_number FROM students';
+                                 $fetch = $connection->query($stm);
+                                $row = $fetch->fetch_assoc();
+                                $std_num = $row['students_number'];
+                    ?>
+
+
+                        <span><?php echo $std_num; ?></span>
                         <span>etudiant</span>
                     </div>
                     <div class="icon">
@@ -41,14 +59,28 @@
                                 <th>Id</th>
                                 <th>Nom</th>
                                 <th class="hidden">Email</th>
+                                <th>class</th>
                                 <th>Actions</th>
                             </tr>
+                            <?php
+                                $pub_id = $_GET['id'];
+                                 $stm = "select * from students WHERE pub_id = '$pub_id'";
+                                 $fetch = $connection->query($stm);
+                                while ($row = $fetch->fetch_assoc()) {
+                                    ?>
                             <tr>
-                                <td>1</td>
-                                <td>Otmane</td>
-                                <td class="hidden">otmane@gmail.com</td>
+                                <td><?php $id = $row['idstd'];
+                                    echo $id; ?></td>
+                                <td><?php $name = $row['full_name'];
+                                    echo $name; ?></td>
+                                <td class="hidden"><?php $email = $row['email'];
+                                    echo $email; ?></td>
+                                <td ><?php $class = $row['class'];
+                                    echo $class; ?></td>
+                                <?php
+                                }?>
                                 <td>
-                                   <a href="#" class="btn btn-red open-modal" onclick="document.getElementById('modal1').style.visibility='visible'" ><i class="fa fa-eye" style="color: blue;"></i></a>
+                                   <a href="#" class="btn btn-red open-modal" onclick="view('<?php echo $name; ?>','<?php echo $email; ?>','<?php echo $class; ?>')" ><i class="fa fa-eye" style="color: blue;"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -60,20 +92,19 @@
                     <form action="" class="form">
                         <div class="modal-header">
                             <div class="modal-title">My Info</div>
-                            <button class="close-modal" aria-label="close modal" data-close="" type="button">x</button>
                         </div>
                         <div class="modal-content">
                             <div class="group">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" id="" placeholder="Name">
+                                <input type="text" name="name" id="name_edited" value="" placeholder="Name">
                             </div>
                             <div class="group">
                                 <label for="email">E-mail</label>
-                                <input type="email" name="email" id="" placeholder="Email">
+                                <input type="email" name="email" value="" id="email_edited" placeholder="Email">
                             </div>
                             <div class="group">
-                                <label for="select">Etudiant</label>
-                                <input type="text" name="name" id="" placeholder="Name">
+                                <label for="select">class</label>
+                                <input type="text" name="class" value="" id="edited_class" placeholder="Name">
                             </div>
 
                         </div>
@@ -92,6 +123,7 @@ window.onclick = function(event) {
     }
 }
 </script>
+<script src="js/action.js"></script>
 </body>
 
 </html>

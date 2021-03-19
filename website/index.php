@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'include/meta.php'; ?>
+<?php
+ require_once 'actions/connexion.php';
+ include 'include/meta.php';
+ ?>
 <title>Home</title>
 
 <body>
@@ -9,7 +12,8 @@
         <div class="banner_content">
             <h1>Only I can change my life.<br> <span>No one can do it for me.<span></h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, neque.</p>
-            <div class="btnn"><a href="#">Sign In</a></div>
+            <div class="btnn"><a href="#" onclick="document.getElementById('modal1').style.visibility='visible'">Sign
+                    In</a></div>
         </div>
     </div>
 
@@ -36,7 +40,18 @@
             </div>
         </div>
     </div>
+
     <?php include 'include/footer.php'; ?>
+    <script>
+        // If user clicks anywhere outside of the modal, Modal will close
+
+        var modal = document.getElementById('modal1');
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.visibility = "hidden";
+            }
+        }
+    </script>
 </body>
 
 </html>

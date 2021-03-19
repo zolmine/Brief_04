@@ -17,15 +17,15 @@
       <div class="content">
         <div>
           <span class="fas"></span>
-          <span class="text">Birendranagar, Surkhet</span>
+          <span class="text">YouCode, Safi</span>
         </div>
         <div class="phone">
           <span class="fas"></span>
-          <span class="text">+089-765432100</span>
+          <span class="text">+2126XXXXXXXXXX</span>
         </div>
         <div>
           <span class="fas"></span>
-          <span class="text">abc@example.com</span>
+          <span class="text">abc@youcode.ma</span>
         </div>
       </div>
     </div>
@@ -33,16 +33,14 @@
     <div class="right box">
       <h2>Quick Links</h2>
       <div class="content">
-        <center>
-          <a href="#">Home</a>
-          <br>
-          <a href="#">Blog</a>
-          <br>
-          <a href="#">About</a>
-          <br>
-          <a href="#">Contact</a>
-          </p>
+        <a href="#" style="color:white">Home</a>
+        <br>
+        <a href="#" style="color:white">Our Program</a>
+        <br>
+        <a href="#" style="color:white">Contact Us</a>
+        <br>
+        <a href="#" style="color:white">Sign In</a>
+        </p>
       </div>
-      </center>
     </div>
 </footer>
